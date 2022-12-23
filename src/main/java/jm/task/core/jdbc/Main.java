@@ -1,30 +1,31 @@
 package jm.task.core.jdbc;
+
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.service.UserServiceImpl;
 import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    private static final UserService userService = new UserServiceImpl();
-    private static final User user1 = new User("Ivan", "Petrov", (byte) 30);
-    private static final User user2 = new User("Petr", "Ivanov", (byte) 18);
-    private static final User user3 = new User("John", "Smith", (byte) 46);
-    private static final User user4 = new User("Harry", "Potter", (byte) 52);
-
     public static void main(String[] args) {
+        UserService userService = new UserServiceImpl();
+
+        List<User> users = new ArrayList<>();
+        users.add(new User("Ruslan", "Abramov", (byte) 23));
+        users.add(new User("Roman", "Perov", (byte) 21));
+        users.add(new User("Oksana", "Zhdanova", (byte) 39));
+        users.add(new User("Dmitriy", "Komarov", (byte) 35));
+
         userService.createUsersTable();
-
-        userService.saveUser(user1.getName(), user1.getLastName(), user1.getAge());
-
-        userService.saveUser(user2.getName(), user2.getLastName(), user2.getAge());
-
-        userService.saveUser(user3.getName(), user3.getLastName(), user3.getAge());
-
-        userService.saveUser(user4.getName(), user4.getLastName(), user4.getAge());
-
-        userService.getAllUsers();
-
+        for (User user: users) {
+            userService.saveUser(user.getName(), user.getLastName(), user.getAge());
+            System.out.println("User с именем – " + user.getName() + " добавлен в базу данных");
+        }
+        for (User user: userService.getAllUsers()) {
+            System.out.println(user);
+        }
         userService.cleanUsersTable();
-
         userService.dropUsersTable();
     }
 }
