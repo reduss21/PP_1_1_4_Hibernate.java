@@ -4,6 +4,7 @@ import jm.task.core.jdbc.model.User;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
+import static jm.task.core.jdbc.util.Util.getConnection;
 
 public class UserDaoJDBCImpl implements UserDao {
     private static final String CREATE_USERS_TABLE = "CREATE TABLE IF NOT EXISTS users (" +
@@ -17,12 +18,8 @@ public class UserDaoJDBCImpl implements UserDao {
     private static final String GET_ALL_USERS = "SELECT * FROM users";
     private static final String CLEAN_USERS_TABLE = "TRUNCATE TABLE users";
 
-    private final Connection connection;
+    Connection connection = getConnection();
 
-
-    public UserDaoJDBCImpl(Connection connection) {
-        this.connection = connection;
-    }
     @Override
     public void createUsersTable() {
         try (PreparedStatement ps = connection.prepareStatement(CREATE_USERS_TABLE)) {
