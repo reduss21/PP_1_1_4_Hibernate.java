@@ -4,13 +4,7 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
-
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
@@ -19,16 +13,14 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import jm.task.core.jdbc.model.User;
 
-import javax.persistence.Transient;
 
 public class Util {
     private static SessionFactory sessionFactory;
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost/MySQL";
-    private static final String USERNAME = "red";
-    private static final String PASSWORD = "L{zvjY4lkNcfouE";
+    private static final String URL = "jdbc:mysql://localhost:3306/test";
+    private static final String USERNAME = "redd";
+    private static final String PASSWORD = "redd";
     private static final String DIALECT = "org.hibernate.dialect.MySQLDialect";
-    private static final Environment environment = null;
     public static Connection getConnection() {
         Connection connection = null;
 
@@ -69,7 +61,7 @@ public class Util {
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (Exception e) {
-                System.out.println("Check Util configuration!");
+                System.out.println("Check Util configuration!"+ e);
                 e.printStackTrace();
             }
 
