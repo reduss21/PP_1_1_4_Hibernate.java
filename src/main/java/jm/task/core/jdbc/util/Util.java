@@ -35,10 +35,10 @@ public class Util {
 
         return connection;
     }
-    private static SessionFactory sessionFactory;
+
     public static SessionFactory getHibernateSession() {
 
-        if (sessionFactory == null) {
+        SessionFactory sessionFactory = null;
 
             try {
                 Configuration configuration = new Configuration();
@@ -65,7 +65,6 @@ public class Util {
                 e.printStackTrace();
             }
 
-        }
         return sessionFactory;
     }
 

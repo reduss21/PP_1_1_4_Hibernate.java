@@ -30,11 +30,10 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         } catch (HibernateException e) {
             System.out.printf("%s - ошибка создания таблицы user_data", e.getMessage());
-            if (transaction != null) {
-                transaction.rollback();
+
+
             }
         }
-    }
 
     @Override
     public void dropUsersTable() {
@@ -47,11 +46,8 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         } catch (HibernateException e) {
             System.out.printf("%s - ошибка удаления таблицы user_data", e.getMessage());
-            if (transaction != null) {
-                transaction.rollback();
             }
         }
-    }
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
@@ -97,9 +93,6 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         } catch (HibernateException e) {
             System.out.printf("%s - ошибка получения всех пользователей из таблицы user_data", e.getMessage());
-            if (transaction != null) {
-                transaction.rollback();
-            }
         }
         return users;
     }
@@ -114,9 +107,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
         } catch (HibernateException e) {
             System.out.printf("%s - ошибка удаления всех пользователей из таблицы user_data", e.getMessage());
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
         }
     }
 
